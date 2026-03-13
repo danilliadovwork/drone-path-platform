@@ -9,6 +9,7 @@ import websockets
 from typing import List, Dict, Any
 
 from frontend.annotations.notification import NotificationData
+from frontend.constants.constants import PROCESS_VIDEO_HTTP_URL, JOBS_LIST_HTTP_URL, JOBS_DETAIL_HTTP_URL, NOTIFICATIONS_WS_URI
 
 
 class State(rx.State):
@@ -57,7 +58,7 @@ class State(rx.State):
         # 3. Make the API Call
         try:
             async with httpx.AsyncClient() as client:
-                response = await client.post(url, json=payload)
+                response = await client.post(PROCESS_VIDEO_HTTP_URL, json=payload)
         except httpx.HTTPError as e:
             self.is_submitting = False
             yield rx.toast.error(f"Backend connection error: {e}")
@@ -78,12 +79,11 @@ class State(rx.State):
 
     @rx.event(background=True)
     async def connect_websocket(self):
-        uri = "ws://backend:7000/ws/notifications"
 
         while True:
             try:
                 logging.warning("🔄 REFLEX: Attempting to connect to FastAPI...")  # ADD THIS
-                async with websockets.connect(uri) as ws:
+                async with websockets.connect(NOTIFICATIONS_WS_URI) as ws:
                     logging.warning("✅ REFLEX: Connected to FastAPI!")  # ADD THIS
                     async for message in ws:
                         data = json.loads(message)
@@ -97,28 +97,12 @@ class State(rx.State):
                 logging.error(f"REFLEX: WebSocket dropped: {e}. Retrying in 3s...")
                 await asyncio.sleep(3)
 
-    async def fetch_trajectory(self):
-        url = f"http://backend:7000/api/paths/{self.path_id}"
-
-        try:
-            async with httpx.AsyncClient() as client:
-                response = await client.get(url)
-        except httpx.HTTPError as e:
-            self.status = f"Error: {str(e)}"
-            return
-
-        if response.status_code == httpx.codes.OK:
-            data = response.json()
-            self.trajectory = data.get("trajectory", "")
-        else:
-            self.status = f"Error: {response.text}"
-
     async def fetch_job_detail(self):
-        # 2. Update this logic to use the auto-populated state variable
+        # Update this logic to use the auto-populated state variable
         if not self.job_id:
             return
 
-        url = f"http://backend:7000/api/jobs/{self.job_id}"
+        url = JOBS_DETAIL_HTTP_URL.format(job_id=self.job_id)
 
         try:
             async with httpx.AsyncClient() as client:
@@ -179,7 +163,7 @@ class State(rx.State):
     async def fetch_jobs(self):
         """Fetches the jobs for the current page."""
         skip = (self.page - 1) * self.limit
-        url = f"http://backend:7000/api/jobs?skip={skip}&limit={self.limit}"
+        url = f"{JOBS_LIST_HTTP_URL}?skip={skip}&limit={self.limit}"
 
         try:
             async with httpx.AsyncClient() as client:

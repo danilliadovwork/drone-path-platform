@@ -40,7 +40,7 @@ help: ## Show this help message
 .PHONY: up build down
 
 up: ## Start the standard CPU stack
-	$(COMPOSE_CPU) up -d
+	$(COMPOSE_CPU) up
 
 build: ## Build the CPU stack
 	$(COMPOSE_CPU) build
@@ -54,7 +54,7 @@ down: ## Stop the CPU stack
 .PHONY: up-gpu build-gpu down-gpu
 
 up-gpu: ## Start the GPU accelerated stack
-	$(COMPOSE_GPU) up -d
+	$(COMPOSE_GPU) up
 
 build-gpu: ## Build the GPU stack
 	$(COMPOSE_GPU) build
@@ -86,17 +86,17 @@ clean: ## Remove containers, networks, and persistent volumes (WARNING: Data los
 .PHONY: shell-backend shell-worker db-shell migrate makemigrations
 
 shell-backend: ## Access the backend container
-	$(COMPOSE_CPU) exec backend bash
+	$(COMPOSE_CPU) exec -it backend bash
 
 shell-worker: ## Access the worker container
-	$(COMPOSE_CPU) exec worker bash
+	$(COMPOSE_CPU) exec -it worker bash
 
 db-shell: ## Access the PostgreSQL database
-	$(COMPOSE_CPU) exec db psql -U user -d drone_db
+	$(COMPOSE_CPU) exec -it db psql -U user -d drone_db
 
 migrate: ## Run Alembic migrations
-	$(COMPOSE_CPU) exec backend alembic upgrade head
+	$(COMPOSE_CPU) exec -it backend alembic upgrade head
 
 # Usage: make makemigrations m="Added flight path column"
 makemigrations: ## Autogenerate a new Alembic migration
-	$(COMPOSE_CPU) exec backend alembic revision --autogenerate -m "$(m)"
+	$(COMPOSE_CPU) exec -it backend alembic revision --autogenerate -m "$(m)"
