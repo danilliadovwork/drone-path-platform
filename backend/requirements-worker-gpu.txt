@@ -1,0 +1,26 @@
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+# ML & Deep Learning
+torch
+torchvision
+
+# Database & Core (needed to write results back)
+sqlalchemy==2.0.0
+geoalchemy2==0.14.0
+psycopg2-binary==2.9.9
+celery==5.3.0
+redis==4.6.0
+
+# Video & Math Processing
+opencv-python-headless==4.8.0.76
+numpy==1.24.0
+shapely==2.0.0
+
+# File Downloading
+google-api-python-client==2.95.0
+google-auth-httplib2==0.1.0
+google-auth-oauthlib==1.0.0
+gdown==5.2.1
+
+# Progress bars
+tqdm==4.67.3
