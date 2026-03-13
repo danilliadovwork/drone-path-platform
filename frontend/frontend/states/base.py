@@ -6,15 +6,14 @@ from typing import List
 import reflex as rx
 import websockets
 from frontend.annotations.notification import NotificationData
-from frontend.constants.constants import PROCESS_VIDEO_HTTP_URL, JOBS_LIST_HTTP_URL, JOBS_DETAIL_HTTP_URL, \
-    NOTIFICATIONS_WS_URI
+from frontend.constants.constants import NOTIFICATIONS_WS_URI
 
 
 # ==========================================
-# 1. Base State (Global WebSocket & Notifications)
+# 1. Global State (Shared across ALL pages)
 # ==========================================
 class BaseState(rx.State):
-    """Holds global data and background tasks shared across all pages."""
+    """Holds global data and background tasks. Do NOT inherit this into other states."""
     notifications: List[NotificationData] = []
 
     @rx.event(background=True)
@@ -28,7 +27,6 @@ class BaseState(rx.State):
                         data = json.loads(message)
                         logging.warning(f"🎯 REFLEX: State successfully received data: {data}")
                         async with self:
-                            # Instantiate the class instead of appending the raw dict
                             new_notif = NotificationData(id=data["id"], status=data["status"])
                             self.notifications = [new_notif] + self.notifications[:9]
 

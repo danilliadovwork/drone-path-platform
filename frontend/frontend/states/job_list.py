@@ -1,3 +1,4 @@
+import logging
 import math
 from typing import List, Dict, Any
 
@@ -36,7 +37,7 @@ class JobListState(BaseState):
                 self.total_jobs = data.get("total", 0)
                 self.processed_jobs = data.get("items", [])
         except httpx.HTTPError as e:
-            print(f"Error fetching jobs: {e}")
+            logging.error(f"Error fetching jobs: {e}")
 
     def next_page(self):
         if self.page < self.total_pages:

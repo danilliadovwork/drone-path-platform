@@ -21,13 +21,14 @@ def clickable_live_card(notification: NotificationData):
         width="100%"
     )
 
+
 def live_notifications_overlay():
     return rx.box(
         rx.cond(
-            BaseState.notifications,
+            BaseState.notifications,  # Pointing to the GlobalState
             rx.vstack(
                 rx.text("Live Job Updates", size="2", color="gray", weight="bold"),
-                rx.foreach(BaseState.notifications, clickable_live_card),
+                rx.foreach(BaseState.notifications, clickable_live_card), # Pointing to the GlobalState
                 spacing="2"
             ),
             rx.fragment()
