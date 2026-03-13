@@ -3,7 +3,7 @@
 # ==============================================================================
 # Define the compose files
 COMPOSE_CPU = docker compose -f docker-compose.yml
-COMPOSE_GPU = docker compose -f docker-compose.gpu.yml
+COMPOSE_GPU = docker compose -f docker-compose-gpu.yml
 
 # ==============================================================================
 # Default / Help

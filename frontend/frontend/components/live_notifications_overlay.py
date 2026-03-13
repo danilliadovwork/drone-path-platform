@@ -24,7 +24,6 @@ def clickable_live_card(notification: NotificationData):
 def live_notifications_overlay():
     return rx.box(
         rx.cond(
-            # Using the standard Reflex way to check if a list has items
             State.notifications,
             rx.vstack(
                 rx.text("Live Job Updates", size="2", color="gray", weight="bold"),
@@ -37,5 +36,5 @@ def live_notifications_overlay():
         bottom="20px",
         right="20px",
         width="320px",
-        z_index="9999", # Bumped just in case it was hiding under another div
+        z_index="9999",
     )
