@@ -76,6 +76,51 @@ Ensure the Celery worker container has successfully attached to your GPU:
 docker compose exec worker nvidia-smi
 ```
 
+## 🛠️ Development Commands (Makefile)
+
+To simplify managing the Docker containers, this project includes a `Makefile`. It provides quick shortcuts for building, starting, stopping, and debugging both the standard (CPU) and GPU-accelerated environments.
+
+*(Ensure you have `make` installed on your system to use these commands).*
+
+### 🖥️ CPU Environment
+Commands for the standard `docker-compose.yml` stack.
+
+| Command | Description |
+| :--- | :--- |
+| `make up` | Start the standard CPU stack in the background. |
+| `make build` | Build the CPU stack Docker images. |
+| `make down` | Stop and remove the CPU stack containers. |
+
+### 🎮 GPU Environment
+Commands for the CUDA-enabled `docker-compose.gpu.yml` stack.
+
+| Command | Description |
+| :--- | :--- |
+| `make up-gpu` | Start the GPU-accelerated stack in the background. |
+| `make build-gpu` | Build the GPU stack Docker images. |
+| `make down-gpu` | Stop and remove the GPU stack containers. |
+
+### 🔍 Logs & Utilities
+Commands for monitoring and resetting your local environment.
+
+| Command | Description |
+| :--- | :--- |
+| `make logs` | Tail combined logs for all running services. |
+| `make logs-worker` | Tail logs specifically for the Celery ML worker. |
+| `make logs-backend` | Tail logs specifically for the FastAPI backend. |
+| `make clean` | Stop containers and remove volumes (**WARNING: Wipes local database**). |
+
+### 💻 Development & Shell Access
+Shortcuts for interacting with the database and internal container shells.
+
+| Command | Description |
+| :--- | :--- |
+| `make shell-backend` | Open a bash shell inside the backend container. |
+| `make shell-worker` | Open a bash shell inside the Celery worker container. |
+| `make db-shell` | Open `psql` directly inside the PostgreSQL container. |
+| `make migrate` | Run Alembic database migrations (`alembic upgrade head`). |
+| `make makemigrations m="msg"`| Autogenerate a new Alembic migration with your commit message. |
+
 # 🖥️ Usage
 Open your browser and navigate to http://localhost:3000.
 
