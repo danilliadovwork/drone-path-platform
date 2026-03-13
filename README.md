@@ -76,7 +76,7 @@ Ensure the Celery worker container has successfully attached to your GPU:
 docker compose exec worker nvidia-smi
 ```
 
-#🖥️ Usage
+# 🖥️ Usage
 Open your browser and navigate to http://localhost:3000.
 
 Enter a valid Google Drive link containing a drone video (.mp4, .mkv, etc.).
