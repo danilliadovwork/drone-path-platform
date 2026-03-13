@@ -1,6 +1,6 @@
 import reflex as rx
 
-from frontend.states.state import State
+from frontend.states.base import BaseState
 from frontend.annotations.notification import NotificationData
 
 
@@ -24,10 +24,10 @@ def clickable_live_card(notification: NotificationData):
 def live_notifications_overlay():
     return rx.box(
         rx.cond(
-            State.notifications,
+            BaseState.notifications,
             rx.vstack(
                 rx.text("Live Job Updates", size="2", color="gray", weight="bold"),
-                rx.foreach(State.notifications, clickable_live_card),
+                rx.foreach(BaseState.notifications, clickable_live_card),
                 spacing="2"
             ),
             rx.fragment()
