@@ -1,7 +1,7 @@
 import reflex as rx
 from frontend.components.live_notifications_overlay import live_notifications_overlay
 from frontend.components.notification_card import notification_card
-from frontend.states.state import State
+from frontend.states.job_list import JobListState
 
 
 def clickable_job_card(job: dict):
@@ -21,10 +21,10 @@ def jobs_list():
 
             # --- Jobs List ---
             rx.cond(
-                State.processed_jobs,
+                JobListState.processed_jobs,
                 rx.vstack(
                     rx.foreach(
-                        State.processed_jobs,
+                        JobListState.processed_jobs,
                         clickable_job_card
                     ),
                     width="100%"
@@ -36,15 +36,15 @@ def jobs_list():
             rx.hstack(
                 rx.button(
                     "← Previous",
-                    on_click=State.prev_page,
-                    disabled=State.page <= 1,
+                    on_click=JobListState.prev_page,
+                    disabled=JobListState.page <= 1,
                     variant="soft"
                 ),
-                rx.text(f"Page {State.page} of {State.total_pages}", align="center"),
+                rx.text(f"Page {JobListState.page} of {JobListState.total_pages}", align="center"),
                 rx.button(
                     "Next →",
-                    on_click=State.next_page,
-                    disabled=State.page >= State.total_pages,
+                    on_click=JobListState.next_page,
+                    disabled=JobListState.page >= JobListState.total_pages,
                     variant="soft"
                 ),
                 width="100%",
@@ -56,7 +56,7 @@ def jobs_list():
             rx.divider(margin_y="6"),
 
             rx.hstack(
-                rx.button("Refresh", on_click=State.fetch_jobs, variant="outline"),
+                rx.button("Refresh", on_click=JobListState.fetch_jobs, variant="outline"),
                 rx.link(rx.button("Back to Home", variant="ghost"), href="/"),
             ),
 
