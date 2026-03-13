@@ -3,7 +3,6 @@ from frontend.states.state import State
 from frontend.components.live_notifications_overlay import live_notifications_overlay
 
 
-@rx.page(on_load=State.connect_websocket)
 def index():
     return rx.box(
         rx.vstack(

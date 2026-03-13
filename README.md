@@ -133,3 +133,33 @@ Select your Path Predictor Type (OPTICAL_FLOW or DEEP_LEARNING).
 Click Submit.
 
 The UI will provide real-time WebSocket notifications as the video is downloaded, processed by the GPU, and completed. Click the completed job notification to view the generated geographical trajectory on the interactive map.
+
+
+## 📊 Processing Results & Model Comparison
+
+The platform currently supports two different methods for predicting the drone's flight path: **Optical Flow** and **Deep Learning**. Based on our benchmarking with standard drone footage, there are significant differences in both processing speed and trajectory accuracy.
+
+### 1. Optical Flow (Recommended)
+The Optical Flow estimator proved to be the superior model for this specific use case, offering both higher performance and better real-world accuracy.
+
+* **Performance:** Highly efficient on the GPU. The worker processed the footage at roughly **450 to 650 frames per second**, completing the entire job in just **138 seconds**.
+* **Trajectory Accuracy:** The generated map shows a highly detailed and realistic flight path. It accurately captures granular drone movements, including turns, course corrections, and organic deviations.
+
+<p align="center">
+  <img src="processing_results_images/optical-flow-logs.png" width="48%" alt="Optical Flow Processing Logs">
+  <img src="processing_results_images/optical-flow-result.png" width="48%" alt="Optical Flow Map Result">
+</p>
+
+### 2. Deep Learning
+The Deep Learning estimator, while functional, struggled to capture the nuance of the flight path and was significantly more computationally expensive.
+
+* **Performance:** Considerably slower due to the heavier neural network architecture. The worker averaged around **87 to 90 frames per second**, taking **279 seconds** to complete the same video (roughly twice as long as Optical Flow).
+* **Trajectory Accuracy:** The resulting map displays a highly rigid, nearly straight line. The model over-smoothed the data, failing to register the subtle geographical deviations and turns present in the actual flight.
+
+<p align="center">
+  <img src="processing_results_images/deep-learning-logs.png" width="48%" alt="Deep Learning Processing Logs">
+  <img src="processing_results_images/deep-learning-result.png" width="48%" alt="Deep Learning Map Result">
+</p>
+
+### 🔍 Conclusion
+For the best balance of speed and accuracy, it is highly recommended to select **`OPTICAL_FLOW`** as the path predictor type when submitting new jobs. The Deep Learning model remains available for experimental and comparative purposes.
