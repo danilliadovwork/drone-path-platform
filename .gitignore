@@ -76,3 +76,4 @@ ehthumbs.db
 Thumbs.db
 
 frontend/.gitignore
+excluded
