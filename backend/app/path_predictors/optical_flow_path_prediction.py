@@ -1,10 +1,11 @@
+import json
+import math
+from typing import List, Tuple
+
 import cv2
 import numpy as np
 import numpy.typing as npt
-from typing import List, Tuple
-import math
 from shapely.geometry import LineString
-import json
 from tqdm import tqdm
 
 

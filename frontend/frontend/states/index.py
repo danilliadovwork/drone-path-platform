@@ -1,5 +1,6 @@
 import httpx
 import reflex as rx
+
 from frontend.annotations.notification import NotificationData
 from frontend.states.base import BaseState
 from frontend.constants.constants import PROCESS_VIDEO_HTTP_URL, JOBS_LIST_HTTP_URL, JOBS_DETAIL_HTTP_URL, \

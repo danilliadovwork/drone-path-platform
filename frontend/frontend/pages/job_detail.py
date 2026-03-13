@@ -1,6 +1,7 @@
 import reflex as rx
-from frontend.states.job_detail import JobDetailState
+
 from frontend.components.notification_card import notification_card
+from frontend.states.job_detail import JobDetailState
 
 
 # 1. Add the route and on_load trigger so the state fetches fresh data

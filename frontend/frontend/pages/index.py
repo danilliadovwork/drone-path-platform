@@ -1,6 +1,7 @@
 import reflex as rx
-from frontend.states.index import IndexState
+
 from frontend.components.live_notifications_overlay import live_notifications_overlay
+from frontend.states.index import IndexState
 
 
 def index():

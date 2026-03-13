@@ -1,7 +1,7 @@
-import subprocess
 import json
-import re
 import logging
+import re
+import subprocess
 
 
 def extract_start_location(file_path: str) -> tuple[float, float] | None:

@@ -1,10 +1,10 @@
-import logging
 import base64
 import json
 import logging
 from typing import Dict, Any
 
 import httpx
+
 from frontend.annotations.notification import NotificationData
 from frontend.constants.constants import PROCESS_VIDEO_HTTP_URL, JOBS_LIST_HTTP_URL, JOBS_DETAIL_HTTP_URL, \
     NOTIFICATIONS_WS_URI

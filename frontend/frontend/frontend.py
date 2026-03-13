@@ -1,4 +1,5 @@
 import reflex as rx
+
 from frontend.states.index import IndexState
 from frontend.states.job_list import JobListState
 from frontend.states.job_detail import JobDetailState

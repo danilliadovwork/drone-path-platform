@@ -1,13 +1,14 @@
-import logging
-import os
-import cv2
-import math
 import json
-import torch
-import numpy as np
-import threading
+import logging
+import math
+import os
 import queue
+import threading
 from typing import List, Tuple
+
+import cv2
+import numpy as np
+import torch
 from shapely.geometry import LineString
 from torchvision.models.optical_flow import (
     raft_large, Raft_Large_Weights,

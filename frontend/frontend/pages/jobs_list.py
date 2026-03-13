@@ -1,4 +1,5 @@
 import reflex as rx
+
 from frontend.components.live_notifications_overlay import live_notifications_overlay
 from frontend.components.notification_card import notification_card
 from frontend.states.job_list import JobListState

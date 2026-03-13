@@ -1,4 +1,5 @@
 import os
+
 from app.core.celery_app import celery_app
 from app.core.database import SessionLocal
 from app.models.flight_path import FlightPath
