@@ -146,8 +146,8 @@ The Optical Flow estimator proved to be the superior model for this specific use
 * **Trajectory Accuracy:** The generated map shows a highly detailed and realistic flight path. It accurately captures granular drone movements, including turns, course corrections, and organic deviations.
 
 <p align="center">
-  <img src="processing_results_images/optical-flow-logs.png" width="48%" alt="Optical Flow Processing Logs">
-  <img src="processing_results_images/optical-flow-result.png" width="48%" alt="Optical Flow Map Result">
+  <img src="images/optical-flow-logs.png" width="48%" alt="Optical Flow Processing Logs">
+  <img src="images/optical-flow-result.png" width="48%" alt="Optical Flow Map Result">
 </p>
 
 ### 2. Deep Learning
@@ -157,9 +157,18 @@ The Deep Learning estimator, while functional, struggled to capture the nuance o
 * **Trajectory Accuracy:** The resulting map displays a highly rigid, nearly straight line. The model over-smoothed the data, failing to register the subtle geographical deviations and turns present in the actual flight.
 
 <p align="center">
-  <img src="processing_results_images/deep-learning-logs.png" width="48%" alt="Deep Learning Processing Logs">
-  <img src="processing_results_images/deep-learning-result.png" width="48%" alt="Deep Learning Map Result">
+  <img src="images/deep-learning-logs.png" width="48%" alt="Deep Learning Processing Logs">
+  <img src="images/deep-learning-result.png" width="48%" alt="Deep Learning Map Result">
 </p>
 
 ### 🔍 Conclusion
 For the best balance of speed and accuracy, it is highly recommended to select **`OPTICAL_FLOW`** as the path predictor type when submitting new jobs. The Deep Learning model remains available for experimental and comparative purposes.
+
+
+# Architecture
+
+High-level architecture visualization:
+
+<p align="center">
+  <img src="images/architecture-drone-path-prediction.jpg" width="48%" alt="Sample architecture">
+</p>
